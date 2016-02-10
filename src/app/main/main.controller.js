@@ -22,9 +22,10 @@
           for (var prop in obj) {
             //console.log(obj.$$hashKey);
             //console.log($scope.editData.$$hashKey);
-            if($scope.editData && obj.$$hashKey === $scope.editData.$$hashKey) {
+            if($scope.editData && obj.$$hashKey !== $scope.editData.$$hashKey) {
               console.log("update"); break;
             }else {
+              pushData();
               console.log("new"); break;
             }
             //obj = editData;
@@ -33,14 +34,14 @@
           }
         }
       } else {
-        $scope.noteCollection.push({
-          noteTitle: $scope.addNote.noteTitle,
-          noteContent: $scope.addNote.noteContent
-        });
+
       }
 
 
-
+      $scope.noteCollection.push({
+        noteTitle: $scope.addNote.noteTitle,
+        noteContent: $scope.addNote.noteContent
+      });
 
 
       toastr.info("Note added !");
@@ -64,6 +65,13 @@
       console.log($scope.noteCollection);
 
     };
+
+    function pushData() {
+      $scope.noteCollection.push({
+        noteTitle: $scope.addNote.noteTitle,
+        noteContent: $scope.addNote.noteContent
+      });
+    }
 
 
   }
