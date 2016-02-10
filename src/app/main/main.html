@@ -1,0 +1,55 @@
+  <div flex layout="row" layout-align="center center">
+
+    <md-card flex="50" class="addNoteContainer">
+      <form name="addNoteForm">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Add New Note</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <md-input-container class="md-block">
+          <label>Title</label>
+          <input required name="noteTitle" ng-model="addNote.noteTitle">
+          <div ng-messages="addNoteForm.noteTitle.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Note</label>
+          <input required name="noteContent" ng-model="addNote.noteContent">
+          <div ng-messages="addNoteForm.noteContent.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button type="submit" class="md-primary md-light md-raised"
+          ng-click="addNoteForm.$valid ? saveNoteForm() : noop()"> <i class="material-icons">add</i>Add Note
+        </md-button>
+      </md-card-actions>
+    </form>
+    </md-card>
+  </div>
+
+  <div flex >
+  <md-grid-list md-cols-sm="2" md-cols-md="3" md-cols-lg="3" md-cols-gt-lg="3" md-row-height-sm="1:1" md-row-height-md="1:0.8" md-row-height-lg="1:0.86" md-row-height-gt-lg="1:0.68" md-gutter="10px" md-gutter-gt-lg="15px">
+    <md-grid-tile md-colspan-gt-sm="1" md-colspan-sm="1" md-rowspan-gt-sm="1" layout="column"  ng-repeat="note in noteCollection">
+      <md-card class="noteContainer">
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click="editNote($event, note)">
+            <i class="material-icons">border_color</i>
+          </md-button>
+        </md-card-actions>
+        <md-card-title class="card-title">
+          <md-card-title-text>
+            <span class="md-headline">{{note.noteTitle}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content class="card-content">
+          <p>{{note.content}}</p>
+        </md-card-content>
+      </md-card>
+    </md-grid-tile>
+  </md-grid-list>
+</div>
